@@ -1,6 +1,6 @@
 package foods;
 
-public abstract class Food implements Consumable {
+public abstract class Food implements Consumable, Nutritious {
     String name = null;
     public Food(String name) {
         this.name = name;
@@ -11,7 +11,7 @@ public abstract class Food implements Consumable {
         return name.equals(((Food)arg0).name); // Шаг 3
     }
     public String toString() {
-        return name;
+        return name + " (kcal " + calculateCalories() + ")";
     }
     public String getName() {
         return name;

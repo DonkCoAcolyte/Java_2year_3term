@@ -1,4 +1,7 @@
 package foods;
+
+import java.util.Objects;
+
 public class Apple extends Food {
     // Новое внутреннее поле данных РАЗМЕР
     private String size;
@@ -34,5 +37,13 @@ public class Apple extends Food {
 // название продукта, но и его размер
     public String toString() {
         return super.toString() + " размера '" + size.toUpperCase() + "'";
+    }
+
+    @Override
+    public Integer calculateCalories() {
+        Integer calories = 17;
+        if (Objects.equals(size, "small")) calories+= 2;
+        if (Objects.equals(size, "big")) calories+= 6;
+        return calories;
     }
 }

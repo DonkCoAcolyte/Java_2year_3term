@@ -13,4 +13,9 @@ public class Cheese extends Food {
 // Переопределять метод toString() в данном классе не нужно, т.к. он
 // не добавляет внутренних полей данных, а возврат поля name уже
 // реализован в версии toString() базового класса
+
+    @Override
+    public Integer calculateCalories() {
+        return 13;
+    }
 }
