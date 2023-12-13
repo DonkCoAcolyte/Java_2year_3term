@@ -40,6 +40,7 @@ public class MainFrame extends JFrame {
     private JMenuItem saveToTextMenuItem;
     private JMenuItem saveToGraphicsMenuItem;
     private JMenuItem searchValueMenuItem;
+    private JMenuItem aboutMenuItem;
     // Поля ввода для считывания значений переменных
     private JTextField textFieldFrom;
     private JTextField textFieldTo;
@@ -73,6 +74,9 @@ public class MainFrame extends JFrame {
         JMenu tableMenu = new JMenu("Таблица");
 // Добавить его в главное меню
         menuBar.add(tableMenu);
+
+        JMenu aboutMenu = new JMenu("Справка");
+        menuBar.add(aboutMenu);
 // Создать новое "действие" по сохранению в текстовый файл
 
         Action saveToTextAction = new AbstractAction("Сохранить в текстовый файл") {
@@ -137,6 +141,13 @@ public void actionPerformed(ActionEvent event) {
         searchValueMenuItem = tableMenu.add(searchValueAction);
 // По умолчанию пункт меню является недоступным (данных ещѐ нет)
         searchValueMenuItem.setEnabled(false);
+        Action aboutPopupAction = new AbstractAction("О программе") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(MainFrame.this,"Комиссаров Максим 5 группа","О программе", JOptionPane.INFORMATION_MESSAGE);
+            }
+        };
+        aboutMenuItem = aboutMenu.add(aboutPopupAction);
 // Создать область с полями ввода для границ отрезка и шага
 // Создать подпись для ввода левой границы отрезка
         JLabel labelForFrom = new JLabel("X изменяется на интервале от:");
