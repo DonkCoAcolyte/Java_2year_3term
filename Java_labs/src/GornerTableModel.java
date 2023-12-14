@@ -28,7 +28,7 @@ public class GornerTableModel extends AbstractTableModel {
     public int getRowCount() {
 // Вычислить количество точек между началом и концом отрезка
 // исходя из шага табулирования
-        return new Double((Math.ceil((to-from)/step))).intValue()+1;
+        return Double.valueOf((Math.ceil((to-from)/step))).intValue()+1;
     }
     public Object getValueAt(int row, int col) {
 // Вычислить значение X как НАЧАЛО_ОТРЕЗКА + ШАГ*НОМЕР_СТРОКИ
