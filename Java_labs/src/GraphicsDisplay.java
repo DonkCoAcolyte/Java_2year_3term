@@ -179,18 +179,17 @@ minY
 // Шаг 1 - Установить специальное перо для черчения контуров маркеров
         canvas.setStroke(markerStroke);
 // Выбрать красный цвета для контуров маркеров
-        canvas.setColor(Color.BLACK);
 // Выбрать красный цвет для закрашивания маркеров внутри
-        canvas.setPaint(Color.BLACK);
 // Шаг 2 - Организовать цикл по всем точкам графика
         for (Double[] point: graphicsData) {
-            Double y = point[1];
+            Double y = Math.abs(point[1]);
             Integer Sum = 0;
             while (y % 10 > 0){
                 Sum += (int) (y%10);
                 y /= 10;
             }
             if(Sum < 10) canvas.setPaint(Color.GREEN);
+            else canvas.setPaint(Color.BLACK);
 // Инициализировать эллипс как объект для представления маркера
            /* Ellipse2D.Double marker = new Ellipse2D.Double();
             Point2D.Double lineStart = xyToPoint(point[0], point[1]);
