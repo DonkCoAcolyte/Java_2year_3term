@@ -107,9 +107,11 @@ public class MainFrame extends JFrame {
         JLabel labelForResult = new JLabel("Результат:");
         textFieldResult = new JTextField("0", 10);
         textFieldResult.setMaximumSize(textFieldResult.getPreferredSize());
+        textFieldResult.setEditable(false);
 
         JLabel labelForSum = new JLabel("Сумма:");
         textFieldSum = new JTextField("0", 10);
+        textFieldSum.setEditable(false);
         textFieldSum.setMaximumSize(textFieldSum.getPreferredSize());
         
         Box hboxResult = Box.createHorizontalBox();
