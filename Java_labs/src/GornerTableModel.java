@@ -65,9 +65,13 @@ public class GornerTableModel extends AbstractTableModel {
                 for (Integer i = 1; i < polynom_order; i++){
                     result = coefficients[i] + result * x;
                 }
-            Boolean isPositive = false;
-            if (result > 0) isPositive = true;
-            return isPositive;
+                result = Math.abs(result);
+                String resultString = Double.toString(result);
+                resultString = resultString.substring(resultString.indexOf('.') + 1, resultString.length());
+                Double root = Math.sqrt(Double.parseDouble(resultString));
+            Boolean FractionalIsWholeSqr = false;
+            if (root % 1 == 0) FractionalIsWholeSqr = true;
+            return FractionalIsWholeSqr;
             }
     }
     return 0;
@@ -81,7 +85,7 @@ public class GornerTableModel extends AbstractTableModel {
 // Название 2-го столбца
                 return "Значение многочлена";
             case 2:
-                return "Число положительное?";
+                return "Дробная часть является квадратом целого числа?";
         }
         return "0";
     }
