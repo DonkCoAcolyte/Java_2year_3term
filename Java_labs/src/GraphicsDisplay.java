@@ -38,13 +38,13 @@ public class GraphicsDisplay extends JPanel {
         setBackground(Color.WHITE);
 // Сконструировать необходимые объекты, используемые в рисовании
 // Перо для рисования графика
-        graphicsStroke = new BasicStroke(2.0f, BasicStroke.CAP_BUTT,
-                BasicStroke.JOIN_ROUND, 10.0f, null, 0.0f);
+        graphicsStroke = new BasicStroke(5.0f, BasicStroke.CAP_BUTT,
+                BasicStroke.JOIN_ROUND, 10.0f, new float[]{30, 5, 15, 5, 5, 5, 15, 5}, 0.0f);
 // Перо для рисования осей координат
         axisStroke = new BasicStroke(2.0f, BasicStroke.CAP_BUTT,
                 BasicStroke.JOIN_MITER, 10.0f, null, 0.0f);
 // Перо для рисования контуров маркеров
-        markerStroke = new BasicStroke(1.0f, BasicStroke.CAP_BUTT,
+        markerStroke = new BasicStroke(2.0f, BasicStroke.CAP_BUTT,
                 BasicStroke.JOIN_MITER, 10.0f, null, 0.0f);
 // Шрифт для подписей осей координат
         axisFont = new Font("Serif", Font.BOLD, 36);
@@ -179,22 +179,29 @@ minY
 // Шаг 1 - Установить специальное перо для черчения контуров маркеров
         canvas.setStroke(markerStroke);
 // Выбрать красный цвета для контуров маркеров
-        canvas.setColor(Color.RED);
+        canvas.setColor(Color.BLACK);
 // Выбрать красный цвет для закрашивания маркеров внутри
-        canvas.setPaint(Color.RED);
+        canvas.setPaint(Color.BLACK);
 // Шаг 2 - Организовать цикл по всем точкам графика
         for (Double[] point: graphicsData) {
+            Double y = point[1];
+            Integer Sum = 0;
+            while (y % 10 > 0){
+                Sum += (int) (y%10);
+                y /= 10;
+            }
+            if(Sum < 10) canvas.setPaint(Color.GREEN);
 // Инициализировать эллипс как объект для представления маркера
-            Ellipse2D.Double marker = new Ellipse2D.Double();
+           /* Ellipse2D.Double marker = new Ellipse2D.Double();
             Point2D.Double lineStart = xyToPoint(point[0], point[1]);
             lineStart.setLocation(lineStart.getX() + 5, lineStart.getY());
             Point2D.Double lineEnd = xyToPoint(point[0], point[1]);
             lineEnd.setLocation(lineEnd.getX() - 5, lineStart.getY());
             Line2D.Double crossLine = new Line2D.Double(lineStart, lineEnd);
             canvas.draw(crossLine);
-/* Эллипс будет задаваться посредством указания координат
+*//* Эллипс будет задаваться посредством указания координат
 его центра
-и угла прямоугольника, в который он вписан */
+и угла прямоугольника, в который он вписан *//*
 // Центр - в точке (x,y)
             Point2D.Double center = xyToPoint(point[0], point[1]);
 // Угол прямоугольника - отстоит на расстоянии (3,3)
@@ -202,7 +209,13 @@ minY
 // Задать эллипс по центру и диагонали
             marker.setFrameFromCenter(center, corner);
            // canvas.draw(marker); // Начертить контур маркера
-           // canvas.fill(marker); // Залить внутреннюю область маркера
+           // canvas.fill(marker); // Залить внутреннюю область маркера*/
+            int markerSize = 11 / 2;
+            Point2D.Double center = xyToPoint(point[0], point[1]);
+            canvas.drawLine((int)center.getX() - markerSize, (int)center.getY() - markerSize, (int)center.getX() + markerSize,  (int)center.getY() - markerSize);
+            canvas.drawLine((int)center.getX() - markerSize, (int)center.getY() - markerSize, (int)center.getX(),  (int)center.getY() + markerSize);
+            canvas.drawLine((int)center.getX(), (int)center.getY() + markerSize, (int)center.getX() + markerSize,  (int)center.getY() - markerSize);
+
         }
     }
     // Метод, обеспечивающий отображение осей координат
